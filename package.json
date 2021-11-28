@@ -36,18 +36,18 @@
     "imports-loader": "^0.7.1",
     "jquery": "^3.5.0",
     "json-loader": "^0.5.4",
-    "node-sass": "^4.5.3",
+    "node-sass": "^6.0.0",
     "popper.js": "^1.12.6",
     "postcss-loader": "^2.0.8",
     "resolve-url-loader": "^2.2.0",
     "sass-loader": "^6.0.6",
     "solium": "^1.0.4",
     "style-loader": "^0.13.2",
-    "truffle": "^5.0.13",
+    "truffle": "5.2.0",
     "truffle-contract": "^1.1.11",
     "url-loader": "^0.6.2",
-    "web3": "^0.18.2",
-    "web3-utils": "^1.0.0-beta.48",
+    "web3": "0.20.2",
+    "web3-utils": "1.0.0-beta.48",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.9.3"
   },
@@ -71,13 +71,12 @@
   },
   "dependencies": {
     "@ensdomains/ens": "^0.4.0",
-    "@ensdomains/ethregistrar": "^2.0.0",
+    "@ensdomains/ens-contracts": "^0.0.7",
     "eth-ens-namehash": "^2.0.0",
     "html-loader": "^0.5.1",
     "idna-uts46": "1.1.0",
     "js-sha3": "0.6.1",
     "punycode": "2.1.0",
-    "truffle-default-builder": "^2.0.0",
     "underscore": "^1.8.3"
   }
 }

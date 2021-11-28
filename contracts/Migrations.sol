@@ -1,9 +1,9 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.4;
 
 // Required so that tests can find it
 import "@ensdomains/ens/contracts/ENSRegistryWithFallback.sol";
-import "@ensdomains/ethregistrar/contracts/OldBaseRegistrarImplementation.sol";
-import "@ensdomains/ethregistrar/contracts/BaseRegistrarImplementation.sol";
+// import "@ensdomains/ens-contracts/contracts/ethregistrar/OldBaseRegistrarImplementation.sol";
+import "@ensdomains/ens-contracts/contracts/ethregistrar/BaseRegistrarImplementation.sol";
 
 contract Migrations {
   address public owner;

@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.4;
 
 import "@ensdomains/ens/contracts/ENS.sol";
 import "./Resolver.sol";
@@ -80,11 +80,9 @@ contract AbstractSubdomainRegistrar is RegistrarInterface {
     /**
      * @dev Configures a domain for sale.
      * @param name The name to configure.
-     * @param price The price in wei to charge for subdomain registrations
-     * @param referralFeePPM The referral fee to offer, in parts per million
      */
-    function configureDomain(string memory name, uint price, uint referralFeePPM) public {
-        configureDomainFor(name, price, referralFeePPM, msg.sender, address(0x0));
+    function configureDomain(string memory name) public {
+        configureDomainFor(name, msg.sender, address(0x0));
     }
 
     /**
@@ -113,12 +111,9 @@ contract AbstractSubdomainRegistrar is RegistrarInterface {
      * @param subdomain The label for the subdomain.
      * @return domain The name of the domain, or an empty string if the subdomain
      *                is unavailable.
-     * @return price The price to register a subdomain, in wei.
-     * @return rent The rent to retain a subdomain, in wei per second.
-     * @return referralFeePPM The referral fee for the dapp, in ppm.
      */
-    function query(bytes32 label, string calldata subdomain) external view returns (string memory domain, uint price, uint rent, uint referralFeePPM);
+    function query(bytes32 label, string calldata subdomain) external view returns (string memory domain);
 
     function owner(bytes32 label) public view returns (address);
-    function configureDomainFor(string memory name, uint price, uint referralFeePPM, address payable _owner, address _transfer) public;
+    function configureDomainFor(string memory name, address payable _owner, address _transfer) public;
 }

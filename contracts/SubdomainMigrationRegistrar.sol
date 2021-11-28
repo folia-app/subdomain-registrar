@@ -1,7 +1,7 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.8.4;
 
 import "@ensdomains/ens/contracts/HashRegistrar.sol";
-import "@ensdomains/ethregistrar/contracts/BaseRegistrar.sol";
+import "@ensdomains/ens-contracts/contracts/ethregistrar/BaseRegistrar.sol";
 
 contract SubdomainMigrationRegistrar {
 
@@ -32,7 +32,7 @@ contract SubdomainMigrationRegistrar {
 
     function () external payable { }
 
-    function configureDomainFor(string memory name, uint price, uint referralFeePPM, address payable _owner, address _transfer) public onlyPreviousRegistrar {
+    function configureDomainFor(string memory name, address payable _owner, address _transfer) public onlyPreviousRegistrar {
         bytes32 label = keccak256(bytes(name));
 
         uint256 value = deed(label).value();
@@ -45,8 +45,6 @@ contract SubdomainMigrationRegistrar {
 
         SubdomainMigrationRegistrar(newRegistrar).configureDomainFor(
             name,
-            price,
-            referralFeePPM,
             _owner,
             _transfer
         );
