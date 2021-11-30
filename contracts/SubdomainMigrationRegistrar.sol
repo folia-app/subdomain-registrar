@@ -1,7 +1,7 @@
-pragma solidity ^0.8.4;
+pragma solidity ^0.5.0;
 
 import "@ensdomains/ens/contracts/HashRegistrar.sol";
-import "@ensdomains/ens-contracts/contracts/ethregistrar/BaseRegistrar.sol";
+import "./ethregistrar/BaseRegistrar.sol";
 
 contract SubdomainMigrationRegistrar {
 

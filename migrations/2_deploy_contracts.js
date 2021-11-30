@@ -27,6 +27,7 @@ module.exports = function (deployer, network, accounts) {
             await ens.setResolver(namehash.hash('resolver.eth'), resolver.address);
 
             const dhr = await HashRegistrar.deployed();
+
             await ens.setSubnodeOwner('0x0', '0x' + sha3('eth'), dhr.address);
 
             await deployer.deploy(SubdomainRegistrar, ens.address);
@@ -38,7 +39,7 @@ module.exports = function (deployer, network, accounts) {
             //     if(domain.registrar !== undefined) return;
             //     await dhr.setSubnodeOwner('0x' + sha3(domain.name), accounts[0]);
             //     await dhr.transfer('0x' + sha3(domain.name), registrar.address);
-            //     await registrar.configureDomain(domain.name, '10000000000000000', 100000);
+            //     await registrar.configureDomain(domain.name);
             // });
 
         } else {

@@ -1,4 +1,4 @@
-pragma solidity ^0.8.4;
+pragma solidity ^0.5.0;
 
 import "./AbstractSubdomainRegistrar.sol";
 import "@ensdomains/ens/contracts/Deed.sol";
@@ -167,7 +167,7 @@ contract SubdomainRegistrar is AbstractSubdomainRegistrar {
         bytes32 subnode = keccak256(abi.encodePacked(node, keccak256(bytes(subdomain))));
 
         if (ens.owner(subnode) != address(0x0)) {
-            return ("", 0, 0, 0);
+            return ("");
         }
 
         Domain storage data = domains[label];

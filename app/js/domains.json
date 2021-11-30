@@ -1,13 +1,10 @@
 [
   {"name": "petsdotcom", "version": "1.0"},
-  {"name": "thirdvoice", "version": "1.0"},
   {"name": "alladvantage", "version": "1.0"},
   {"name": "bidland", "version": "1.0"},
   {"name": "bizbuyer", "version": "1.0"},
   {"name": "capacityweb", "version": "1.0"},
   {"name": "cashwars", "version": "1.0"},
-  {"name": "contentville", "version": "1.0"},
-  {"name": "cyberrebate", "version": "1.0"},
   {"name": "ecircles", "version": "1.0"},
   {"name": "efanshop", "version": "1.0"},
   {"name": "ehobbies", "version": "1.0"},
@@ -20,7 +17,7 @@
   {"name": "misterswap", "version": "1.0"},  
   {"name": "netmorf", "version": "1.0"},
   {"name": "popularpower", "version": "1.0"},  
-  {"name": "shoppinglist", "version": "1.0"},
   {"name": "stickynetworks", "version": "1.0"},
+  {"name": "thirdvoice", "version": "1.0"},
   {"name": "wingspanbank", "version": "1.0"}
 ]
