@@ -55,6 +55,21 @@ contract AbstractSubdomainRegistrar is RegistrarInterface {
         ens.setOwner(subnode, subdomainOwner);
     }
 
+    function undoRegistration(bytes32 subnode, Resolver resolver) internal {
+        // // Get the subdomain so we can configure it
+        // ens.setSubnodeOwner(node, label, address(this));
+
+        // bytes32 subnode = keccak256(abi.encodePacked(node, label));
+        // // Set the subdomain's resolver
+        // ens.setResolver(subnode, address(resolver));
+
+        // Set the address record back to 0x0 on the resolver
+        resolver.setAddr(subnode, address(0));
+
+        // Set ownership of the new subdomain to the 0x0 address
+        ens.setOwner(subnode, address(0)); 
+    }
+
     function supportsInterface(bytes4 interfaceID) public pure returns (bool) {
         return (
             (interfaceID == 0x01ffc9a7) // supportsInterface(bytes4)
