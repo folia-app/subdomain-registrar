@@ -1,8 +1,77 @@
+// File: @ensdomains/ens/contracts/ENS.sol
+
+pragma solidity >=0.4.24;
+
+interface ENS {
+
+    // Logged when the owner of a node assigns a new owner to a subnode.
+    event NewOwner(bytes32 indexed node, bytes32 indexed label, address owner);
+
+    // Logged when the owner of a node transfers ownership to a new account.
+    event Transfer(bytes32 indexed node, address owner);
+
+    // Logged when the resolver for a node changes.
+    event NewResolver(bytes32 indexed node, address resolver);
+
+    // Logged when the TTL of a node changes
+    event NewTTL(bytes32 indexed node, uint64 ttl);
+
+    // Logged when an operator is added or removed.
+    event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
+
+    function setRecord(bytes32 node, address owner, address resolver, uint64 ttl) external;
+    function setSubnodeRecord(bytes32 node, bytes32 label, address owner, address resolver, uint64 ttl) external;
+    function setSubnodeOwner(bytes32 node, bytes32 label, address owner) external returns(bytes32);
+    function setResolver(bytes32 node, address resolver) external;
+    function setOwner(bytes32 node, address owner) external;
+    function setTTL(bytes32 node, uint64 ttl) external;
+    function setApprovalForAll(address operator, bool approved) external;
+    function owner(bytes32 node) external view returns (address);
+    function resolver(bytes32 node) external view returns (address);
+    function ttl(bytes32 node) external view returns (uint64);
+    function recordExists(bytes32 node) external view returns (bool);
+    function isApprovedForAll(address owner, address operator) external view returns (bool);
+}
+
+// File: contracts/Resolver.sol
+
 pragma solidity ^0.5.0;
 
-import "@ensdomains/ens/contracts/ENS.sol";
-import "./Resolver.sol";
-import "./RegistrarInterface.sol";
+
+/**
+ * @dev A basic interface for ENS resolvers.
+ */
+contract Resolver {
+    function supportsInterface(bytes4 interfaceID) public pure returns (bool);
+    function addr(bytes32 node) public view returns (address);
+    function setAddr(bytes32 node, address addr) public;
+}
+
+// File: contracts/RegistrarInterface.sol
+
+pragma solidity ^0.5.0;
+
+contract RegistrarInterface {
+    event OwnerChanged(bytes32 indexed label, address indexed oldOwner, address indexed newOwner);
+    event DomainConfigured(bytes32 indexed label);
+    event DomainUnlisted(bytes32 indexed label);
+    event NewRegistration(bytes32 indexed label, string subdomain, address indexed owner);
+    event RentPaid(bytes32 indexed label, string subdomain, uint amount, uint expirationDate);
+
+    // InterfaceID of these four methods is 0xc1b15f5a
+    function query(bytes32 label, string calldata subdomain) external view returns (string memory domain);
+    function register(bytes32 label, string calldata subdomain, address owner, address resolver) external payable;
+
+    function rentDue(bytes32 label, string calldata subdomain) external view returns (uint timestamp);
+    function payRent(bytes32 label, string calldata subdomain) external payable;
+}
+
+// File: contracts/AbstractSubdomainRegistrar.sol
+
+pragma solidity ^0.5.0;
+
+
+
 
 contract AbstractSubdomainRegistrar is RegistrarInterface {
 
@@ -55,11 +124,11 @@ contract AbstractSubdomainRegistrar is RegistrarInterface {
         ens.setOwner(subnode, subdomainOwner);
     }
 
-    function undoRegistration(bytes32 node, bytes32 label, Resolver resolver) internal {
+    function undoRegistration(bytes32 subnode, Resolver resolver) internal {
         // // Get the subdomain so we can configure it
-        ens.setSubnodeOwner(node, label, address(this));
+        // ens.setSubnodeOwner(node, label, address(this));
 
-        bytes32 subnode = keccak256(abi.encodePacked(node, label));
+        // bytes32 subnode = keccak256(abi.encodePacked(node, label));
         // // Set the subdomain's resolver
         // ens.setResolver(subnode, address(resolver));
 

@@ -1,8 +1,10 @@
 var HashRegistrar = artifacts.require("HashRegistrar");
 var TestResolver = artifacts.require("TestResolver");
-var ENS = artifacts.require("@ensdomains/ens/contracts/ENSRegistry.sol");
+// var ENS = artifacts.require("@ensdomains/ens/contracts/ENSRegistry.sol");
+var ENS = artifacts.require("ENS");
 var SubdomainRegistrar = artifacts.require("SubdomainRegistrar");
 var DeadDotComSeance = artifacts.require("DeadDotComSeance");
+var BaseRegistrarImplementation = artifacts.require("BaseRegistrarImplementation");
 
 var namehash = require('eth-ens-namehash');
 var sha3 = require('js-sha3').keccak_256;
@@ -46,11 +48,17 @@ module.exports = function (deployer, network, accounts) {
 
         } else {
             const ens = await ENS.deployed();
+            const baseRegistrarImplementation = await BaseRegistrarImplementation.deployed();
+
             console.log({ens: ens.address})
             const deadDotComSeance = await DeadDotComSeance.deployed();
             console.log({deadDotComSeance: deadDotComSeance.address})
-            const rinkebyResolver = '0xb14fdee4391732ea9d2267054ead2084684c0ad8';
+            const rinkebyResolver = '0xf6305c19e814d2a75429Fd637d01F7ee0E77d615';
             await deployer.deploy(SubdomainRegistrar, ens.address, deadDotComSeance.address, rinkebyResolver);
+
+            const subdomainRegistrar = await SubdomainRegistrar.deployed()
+            await baseRegistrarImplementation.reclaim("73221999359359550706391122416363156849372066579048440949532785510888433287718", subdomainRegistrar.address)
+
         }
     });
 };

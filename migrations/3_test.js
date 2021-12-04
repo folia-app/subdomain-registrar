@@ -11,7 +11,14 @@ var domainnames = require('../app/js/domains.json');
 
 module.exports = function (deployer, network, accounts) {
     return deployer.then(async () => {
-            const subdomainRegistrar = SubdomainRegistrar.deployed()
-            
+            const subdomainRegistrar = await SubdomainRegistrar.deployed()
+
+            var foo = await subdomainRegistrar.confirmNode(101, "alladvantage")
+            console.log({foo})
+            var tx = await subdomainRegistrar.registerSubdomain("test2", 101)
+            console.log({tx})
+            var tx = await subdomainRegistrar.registerSubdomain("test3", 101)
+            console.log({tx})
+
     });
 };
