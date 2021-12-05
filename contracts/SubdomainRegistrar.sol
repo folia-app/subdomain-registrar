@@ -43,13 +43,6 @@ import "./DeadDotComSeance.sol";
  */
 contract SubdomainRegistrar is AbstractSubdomainRegistrar {
 
-
-    struct Domain {
-        string name;
-        // bytes32 label;
-        uint256 editionsize;
-    }
-
     modifier new_registrar() {
         require(ens.owner(TLD_NODE) != address(registrar));
         _;
@@ -79,7 +72,7 @@ contract SubdomainRegistrar is AbstractSubdomainRegistrar {
     bytes32[] idToDomain;
 
     mapping (bytes32 => uint256) labelToId;
-    mapping (bytes32 => Domain) public domains;
+    mapping (bytes32 => string) public domains;
 
     constructor(ENS ens, DeadDotComSeance _deadDotComSeance, Resolver _resolver) AbstractSubdomainRegistrar(ens) public {
         resolver = _resolver;
@@ -189,14 +182,6 @@ contract SubdomainRegistrar is AbstractSubdomainRegistrar {
         // emit DomainConfigured(label);
     }
 
-    // function configureDomainFor(uint256 _workId, string memory name, uint256 _editionsize) public onlyOwner() {
-    //     bytes32 label = keccak256(bytes(name));
-    //     domains[label].name = name;
-    //     domains[label].editionsize = _editionsize;
-
-    //     emit DomainConfigured(label);
-    // }
-
     // /**
     //  * @dev Returns information about a subdomain.
     //  * @param label The label hash for the domain.
@@ -215,12 +200,13 @@ contract SubdomainRegistrar is AbstractSubdomainRegistrar {
         Domain storage data = domains[label];
         return (data.name);
     }
-    function queryByName(string calldata name, string calldata subdomain) external view returns (uint256 id) {
-        bytes32 label = keccak256(bytes(name));
-        bytes32 node = keccak256(abi.encodePacked(TLD_NODE, label));
-        bytes32 subnode = keccak256(abi.encodePacked(node, keccak256(bytes(subdomain))));
-        return labelToId[subnode];
-    } 
+    // function queryByName(string calldata name, string calldata subdomain) external view returns (uint256 id) {
+    //     bytes32 label = keccak256(bytes(name));
+    //     bytes32 node = keccak256(abi.encodePacked(TLD_NODE, label));
+    //     bytes32 subnode = keccak256(abi.encodePacked(node, keccak256(bytes(subdomain))));
+    //     return labelToId[subnode];
+    // }
+
     // /**
     //  * @dev Returns information about a subdomain.
     //  * @param label The label hash for the domain.
@@ -234,38 +220,22 @@ contract SubdomainRegistrar is AbstractSubdomainRegistrar {
     function register(bytes32 label, string calldata subdomain, address owner, address resolver) external payable {
         revert("nope");
     }
-
-
-    function confirmNode(uint256 tokenId, string calldata name) external view returns (bytes32 _tokenId, bytes32 hashed) {
-        uint256 workId = tokenId / 100;
-        _tokenId = idToDomain[workId];
-
-        hashed = keccak256(bytes("alladvantage"));
-    }
-
-    // /**
-    //  * @dev Registers a subdomain.
-    //  * @param label The label hash of the domain to register a subdomain of.
-    //  * @param subdomain The desired subdomain label.
-    //  * @param _subdomainOwner The account that should own the newly configured subdomain.
-    //  */
     function registerSubdomain(string calldata subdomain, uint256 tokenId) external not_stopped payable {
 
         // make sure msg.sender is the owner of the NFT tokenId
-        address subdomainOwner = msg.sender;
-        // TODO: re-enable for mainnet
-        // address subdomainOwner = DotComSeance.ownerOf(tokenId);
-        // require(subdomainOwner == msg.sender, "can't register a subdomain for an NFT you don't own");
+        address subdomainOwner = deadDotComSeance.ownerOf(tokenId);
+        require(subdomainOwner == msg.sender, "can't register a subdomain for an NFT you don't own");
 
         // make sure that the tokenId is correlated to the domain
         uint256 workId = tokenId / 100;
         uint256 editionId = tokenId % 100;
 
-        bytes32 label = idToDomain[workId];
+        if (workId == 0) {
+            workId = editionId;
+        }
+
+        bytes32 label = idToDomain[workId - 1];
         Domain storage domain = domains[label];
-        // bytes32 label = keccak256(bytes(domain.name));
-        // bytes32 label = domain.label;
-        // uint256 editionsize = domain.editionsize;
 
         bytes32 domainNode = keccak256(abi.encodePacked(TLD_NODE, label));
         bytes32 subdomainLabel = keccak256(bytes(subdomain));
@@ -284,10 +254,19 @@ contract SubdomainRegistrar is AbstractSubdomainRegistrar {
 
         doRegistration(domainNode, subdomainLabel, subdomainOwner, resolver);
         idToSubdomain[tokenId] = subdomain;
-        labelToId[subnode] = tokenId;
+        // labelToId[subnode] = tokenId;
 
         emit NewRegistration(label, subdomain, subdomainOwner);
     }
+
+    // function unregister(string calldata subdomain, uint256 tokenId) external {
+    //     uint256 workId = tokenId / 100;
+    //     bytes32 label = idToDomain[workId];
+    //     Domain storage domain = domains[label];
+    //     bytes32 domainNode = keccak256(abi.encodePacked(TLD_NODE, label));
+    //     bytes32 _subdomain = keccak256(bytes(subdomain));
+    //     undoRegistration(domainNode, _subdomain, resolver);
+    // }
 
     // /**
     //  * @dev Upgrades the domain to a new registrar.
