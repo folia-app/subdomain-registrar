@@ -54,11 +54,15 @@ module.exports = function (deployer, network, accounts) {
             const deadDotComSeance = await DeadDotComSeance.deployed();
             console.log({deadDotComSeance: deadDotComSeance.address})
             const rinkebyResolver = '0xf6305c19e814d2a75429Fd637d01F7ee0E77d615';
+            const mainnetResolver = '0x004976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
             await deployer.deploy(SubdomainRegistrar, ens.address, deadDotComSeance.address, rinkebyResolver);
 
             const subdomainRegistrar = await SubdomainRegistrar.deployed()
+            // petsdotcom.eth
+            await baseRegistrarImplementation.reclaim("108350481691301844584283756747981115641741054191609884149132907110757544526360", subdomainRegistrar.address)
+            // alladvantage.eth
             await baseRegistrarImplementation.reclaim("73221999359359550706391122416363156849372066579048440949532785510888433287718", subdomainRegistrar.address)
-
+            
         }
     });
 };
