@@ -15,10 +15,10 @@ module.exports = function (deployer, network, accounts) {
             const subdomainRegistrar = await SubdomainRegistrar.deployed()
             const baseRegistrarImplementation = await BaseRegistrarImplementation.deployed();
             
-            // petsdotcom.eth
-            await baseRegistrarImplementation.reclaim("108350481691301844584283756747981115641741054191609884149132907110757544526360", subdomainRegistrar.address)
-            // alladvantage.eth
-            await baseRegistrarImplementation.reclaim("73221999359359550706391122416363156849372066579048440949532785510888433287718", subdomainRegistrar.address)
+            // // petsdotcom.eth
+            // await baseRegistrarImplementation.reclaim("108350481691301844584283756747981115641741054191609884149132907110757544526360", subdomainRegistrar.address)
+            // // alladvantage.eth
+            // await baseRegistrarImplementation.reclaim("73221999359359550706391122416363156849372066579048440949532785510888433287718", subdomainRegistrar.address)
             
 
             // var foo = await subdomainRegistrar.confirmNode(101, "alladvantage")
@@ -29,8 +29,8 @@ module.exports = function (deployer, network, accounts) {
             // console.log({tx})
             // var tx = await subdomainRegistrar.unregister("test2", 101)
             // // console.log({tx})
-            var tx = await subdomainRegistrar.unregister("alice", 201)
-            console.log({tx})
+            // var tx = await subdomainRegistrar.unregister("alice", 201)
+            // console.log({tx})
             // var tx = await subdomainRegistrar.unregister("billy", 201)
             // console.log({tx})
 
@@ -39,8 +39,8 @@ module.exports = function (deployer, network, accounts) {
             // console.log({tx})
 
 
-            // var tx = await subdomainRegistrar.registerSubdomain("billy", 101)
-            // console.log({tx})
+            var tx = await subdomainRegistrar.registerSubdomain("billy", 1)
+            console.log({tx})
 
     });
 };
