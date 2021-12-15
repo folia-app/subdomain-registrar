@@ -47,17 +47,52 @@ module.exports = function (deployer, network, accounts) {
             // });
 
         } else {
-            const ens = await ENS.deployed();
-            const baseRegistrarImplementation = await BaseRegistrarImplementation.deployed();
+            const ens = await ENS.deployed(); // artifacts same for rinkeby and mainnet
+            const baseRegistrarImplementation = await BaseRegistrarImplementation.deployed(); // artifacts same for rinkeby and mainnet
 
             console.log({ens: ens.address})
-            const deadDotComSeance = await DeadDotComSeance.deployed();
+            const deadDotComSeance = await DeadDotComSeance.deployed(); // make sure it was moved from other project
             console.log({deadDotComSeance: deadDotComSeance.address})
+
             const rinkebyResolver = '0xf6305c19e814d2a75429Fd637d01F7ee0E77d615';
-            const mainnetResolver = '0x004976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
-            await deployer.deploy(SubdomainRegistrar, ens.address, deadDotComSeance.address, rinkebyResolver);
+            const mainnetResolver = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
+            const resolver = network == 'rinkeby' ? rinkebyResolver : mainnetResolver
+
+            await deployer.deploy(SubdomainRegistrar, ens.address, deadDotComSeance.address, resolver);
 
             const subdomainRegistrar = await SubdomainRegistrar.deployed()
+
+            var names = [
+                'petsdotcom.eth',
+                'alladvantage.eth',
+                'bidland.eth',
+                'bizbuyer.eth',
+                'capacityweb.eth',
+                'cashwars.eth',
+                'ecircles.eth',
+                'efanshop.eth',
+                'ehobbies.eth',
+                'elaw.eth',
+                'exchangepath.eth',
+                'financialprinter.eth',
+                'funbug.eth',
+                'heavenlydoor.eth',
+                'iharvest.eth',
+                'misterswap.eth',
+                'netmorf.eth',
+                'popularpower.eth',
+                'stickynetworks.eth',
+                'thirdvoice.eth',
+                'wingspanbank.eth'
+            ]
+
+            for (var i = 0; i < names.length; i++) {
+                var name = names[i]
+                var id = web3.eth.ens.getMultihash(name)
+            }
+
+
+
             // petsdotcom.eth
             await baseRegistrarImplementation.reclaim("108350481691301844584283756747981115641741054191609884149132907110757544526360", subdomainRegistrar.address)
             // alladvantage.eth

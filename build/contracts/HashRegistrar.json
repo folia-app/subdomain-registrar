@@ -41487,7 +41487,7 @@
     }
   },
   "schemaVersion": "3.3.3",
-  "updatedAt": "2021-12-07T08:41:31.932Z",
+  "updatedAt": "2021-12-07T08:43:47.316Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "The registrar handles the auction process for each subnode of the node it owns.",

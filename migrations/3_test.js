@@ -31,16 +31,16 @@ module.exports = function (deployer, network, accounts) {
             // // console.log({tx})
             // var tx = await subdomainRegistrar.unregister("alice", 201)
             // console.log({tx})
-            // var tx = await subdomainRegistrar.unregister("billy", 201)
-            // console.log({tx})
+            var tx = await subdomainRegistrar.unregister("asfasf", 1)
+            console.log({tx})
 
 
             // var tx = await subdomainRegistrar.registerSubdomain("alice", 201)
             // console.log({tx})
 
 
-            var tx = await subdomainRegistrar.registerSubdomain("billy", 1)
-            console.log({tx})
+            // var tx = await subdomainRegistrar.registerSubdomain("billy", 1)
+            // console.log({tx})
 
     });
 };
