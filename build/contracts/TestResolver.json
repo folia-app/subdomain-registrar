@@ -1568,7 +1568,7 @@
     }
   },
   "schemaVersion": "3.3.3",
-  "updatedAt": "2021-12-07T08:43:47.332Z",
+  "updatedAt": "2021-12-15T23:00:48.665Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "A test resolver implementation",

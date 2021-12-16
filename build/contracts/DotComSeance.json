@@ -1,5 +1,5 @@
 {
-  "contractName": "DeadDotComSeance",
+  "contractName": "DotComSeance",
   "abi": [
     {
       "constant": true,
@@ -23,17 +23,17 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"ownerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/billy/GitHub/folia-app/subdomain-registrar/contracts/DeadDotComSeance.sol\":\"DeadDotComSeance\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/billy/GitHub/folia-app/subdomain-registrar/contracts/DeadDotComSeance.sol\":{\"keccak256\":\"0x41b4710fd31d9e26d65ce0e242b8ff967ccbdd52faeddd0bf1aa411d981b2815\",\"urls\":[\"bzz-raw://68bcc2b17855a77e092a918cfe8c8f5da80eef9adf32f726192d0a16a35fc096\",\"dweb:/ipfs/QmafHtjfrQZM6YGavZkLPDpxXaxSuEEQnndywvVXh6ECLb\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"ownerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/billy/GitHub/folia-app/subdomain-registrar/contracts/DotComSeance.sol\":\"DotComSeance\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/billy/GitHub/folia-app/subdomain-registrar/contracts/DotComSeance.sol\":{\"keccak256\":\"0x474989d99d4e4c2bc5ea5b251b67cbb3f08ae0d23588d3339bde69873b0e285e\",\"urls\":[\"bzz-raw://781642b5263c56538ba3faa3ba76cb01f68e4db2b16589e0e58aaa8624058d74\",\"dweb:/ipfs/QmVcDauHwUMnSUwYpDQSp3bWKNvep1JTEerWHRmcfZjMg7\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity ^0.5.0;\n\ncontract DeadDotComSeance {\n  function ownerOf(uint256 tokenId) public view returns (address);\n}",
-  "sourcePath": "/Users/billy/GitHub/folia-app/subdomain-registrar/contracts/DeadDotComSeance.sol",
+  "source": "pragma solidity ^0.5.0;\n\ncontract DotComSeance {\n  function ownerOf(uint256 tokenId) public view returns (address);\n}",
+  "sourcePath": "/Users/billy/GitHub/folia-app/subdomain-registrar/contracts/DotComSeance.sol",
   "ast": {
-    "absolutePath": "/Users/billy/GitHub/folia-app/subdomain-registrar/contracts/DeadDotComSeance.sol",
+    "absolutePath": "/Users/billy/GitHub/folia-app/subdomain-registrar/contracts/DotComSeance.sol",
     "exportedSymbols": {
-      "DeadDotComSeance": [
+      "DotComSeance": [
         348
       ]
     },
@@ -61,7 +61,7 @@
         "linearizedBaseContracts": [
           348
         ],
-        "name": "DeadDotComSeance",
+        "name": "DotComSeance",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
@@ -83,7 +83,7 @@
                   "name": "tokenId",
                   "nodeType": "VariableDeclaration",
                   "scope": 347,
-                  "src": "72:15:1",
+                  "src": "68:15:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -94,7 +94,7 @@
                     "id": 341,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "72:7:1",
+                    "src": "68:7:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -104,7 +104,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "71:17:1"
+              "src": "67:17:1"
             },
             "returnParameters": {
               "id": 346,
@@ -116,7 +116,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 347,
-                  "src": "110:7:1",
+                  "src": "106:7:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -127,7 +127,7 @@
                     "id": 344,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "110:7:1",
+                    "src": "106:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -138,26 +138,26 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "109:9:1"
+              "src": "105:9:1"
             },
             "scope": 348,
-            "src": "55:64:1",
+            "src": "51:64:1",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
         "scope": 349,
-        "src": "25:96:1"
+        "src": "25:92:1"
       }
     ],
-    "src": "0:121:1"
+    "src": "0:117:1"
   },
   "legacyAST": {
     "attributes": {
-      "absolutePath": "/Users/billy/GitHub/folia-app/subdomain-registrar/contracts/DeadDotComSeance.sol",
+      "absolutePath": "/Users/billy/GitHub/folia-app/subdomain-registrar/contracts/DotComSeance.sol",
       "exportedSymbols": {
-        "DeadDotComSeance": [
+        "DotComSeance": [
           348
         ]
       }
@@ -190,7 +190,7 @@
           "linearizedBaseContracts": [
             348
           ],
-          "name": "DeadDotComSeance",
+          "name": "DotComSeance",
           "scope": 349
         },
         "children": [
@@ -232,17 +232,17 @@
                         },
                         "id": 341,
                         "name": "ElementaryTypeName",
-                        "src": "72:7:1"
+                        "src": "68:7:1"
                       }
                     ],
                     "id": 342,
                     "name": "VariableDeclaration",
-                    "src": "72:15:1"
+                    "src": "68:15:1"
                   }
                 ],
                 "id": 343,
                 "name": "ParameterList",
-                "src": "71:17:1"
+                "src": "67:17:1"
               },
               {
                 "children": [
@@ -266,32 +266,32 @@
                         },
                         "id": 344,
                         "name": "ElementaryTypeName",
-                        "src": "110:7:1"
+                        "src": "106:7:1"
                       }
                     ],
                     "id": 345,
                     "name": "VariableDeclaration",
-                    "src": "110:7:1"
+                    "src": "106:7:1"
                   }
                 ],
                 "id": 346,
                 "name": "ParameterList",
-                "src": "109:9:1"
+                "src": "105:9:1"
               }
             ],
             "id": 347,
             "name": "FunctionDefinition",
-            "src": "55:64:1"
+            "src": "51:64:1"
           }
         ],
         "id": 348,
         "name": "ContractDefinition",
-        "src": "25:96:1"
+        "src": "25:92:1"
       }
     ],
     "id": 349,
     "name": "SourceUnit",
-    "src": "0:121:1"
+    "src": "0:117:1"
   },
   "compiler": {
     "name": "solc",
@@ -301,103 +301,12 @@
     "4": {
       "events": {},
       "links": {},
-      "address": "0xcdF8b3Ff0f1F366f183B104BC64Eb2357ac8B1A8",
-      "transactionHash": "0xde6d65aa7ec985b545b6438c35423f3ad185e8b135a868d6bc79b5913212f6ad"
-    },
-    "5777": {
-      "events": {
-        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "name": "previousOwner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "name": "newOwner",
-              "type": "address"
-            }
-          ],
-          "name": "OwnershipTransferred",
-          "type": "event"
-        },
-        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "name": "from",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "name": "to",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "name": "tokenId",
-              "type": "uint256"
-            }
-          ],
-          "name": "Transfer",
-          "type": "event"
-        },
-        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "name": "owner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "name": "approved",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "name": "tokenId",
-              "type": "uint256"
-            }
-          ],
-          "name": "Approval",
-          "type": "event"
-        },
-        "0x17307eab39ab6107e8899845ad3d59bd9653f200f220920489ca2b5937696c31": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "name": "owner",
-              "type": "address"
-            },
-            {
-              "indexed": true,
-              "name": "operator",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "name": "approved",
-              "type": "bool"
-            }
-          ],
-          "name": "ApprovalForAll",
-          "type": "event"
-        }
-      },
-      "links": {},
-      "address": "0x8f0483125FCb9aaAEFA9209D8E9d7b9C8B9Fb90F",
-      "transactionHash": "0x59d1ad00ea21399658f83a3973308044262f15d32d5cccd5e3de4a08f3c84333"
+      "address": "0x24Fe466A59A9d072a8fC0A4ad3f8396d91A34399",
+      "transactionHash": "0xaf4ab35128060d2eafd67d97a38139c362c708a9bb0d3a141ecaef5b347f1fbc"
     }
   },
   "schemaVersion": "3.3.3",
-  "updatedAt": "2021-12-15T23:00:48.686Z",
-  "networkType": "ethereum",
+  "updatedAt": "2021-12-16T00:13:43.300Z",
   "devdoc": {
     "methods": {}
   },

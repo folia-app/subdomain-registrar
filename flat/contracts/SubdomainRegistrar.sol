@@ -254,11 +254,11 @@ interface Registrar {
     function entries(bytes32 _hash) external view returns (Mode, address, uint, uint, uint);
 }
 
-// File: contracts/DeadDotComSeance.sol
+// File: contracts/DotComSeance.sol
 
 pragma solidity ^0.5.0;
 
-contract DeadDotComSeance {
+contract DotComSeance {
   function ownerOf(uint256 tokenId) public view returns (address);
 }
 
@@ -284,18 +284,18 @@ contract SubdomainRegistrar is AbstractSubdomainRegistrar {
 
     event NewSubdomain(string domain, string subdomain, uint256 tokenId, address tokenOwner, string oldSubdomain);
 
-    Resolver resolver;
-    DeadDotComSeance deadDotComSeance;
-    address oowner;
-    mapping (uint256 => string) idToSubdomain;
-    bytes32[] idToDomain;
+    Resolver public resolver;
+    DotComSeance public dotComSeance;
+    address public oowner;
+    mapping (uint256 => string) public idToSubdomain;
+    bytes32[] public idToDomain;
 
-    mapping (bytes32 => uint256) labelToId;
+    mapping (bytes32 => uint256) public labelToId;
     mapping (bytes32 => string) public domains;
 
-    constructor(ENS ens, DeadDotComSeance _deadDotComSeance, Resolver _resolver) AbstractSubdomainRegistrar(ens) public {
+    constructor(ENS ens, DotComSeance _dotComSeance, Resolver _resolver) AbstractSubdomainRegistrar(ens) public {
         resolver = _resolver;
-        deadDotComSeance = _deadDotComSeance;
+        dotComSeance = _dotComSeance;
         oowner = msg.sender;
 
         domains[keccak256(bytes("petsdotcom"))]= "petsdotcom";
@@ -343,8 +343,8 @@ contract SubdomainRegistrar is AbstractSubdomainRegistrar {
         domains[keccak256(bytes("iharvest"))]= "iharvest";
         idToDomain.push(keccak256(bytes("iharvest")));
 
-        domains[keccak256(bytes("misterswap"))]= "misterswap";
-        idToDomain.push(keccak256(bytes("misterswap")));
+        domains[keccak256(bytes("mrswap"))]= "mrswap";
+        idToDomain.push(keccak256(bytes("mrswap")));
 
         domains[keccak256(bytes("netmorf"))]= "netmorf";
         idToDomain.push(keccak256(bytes("netmorf")));
@@ -376,7 +376,7 @@ contract SubdomainRegistrar is AbstractSubdomainRegistrar {
 
     function registerSubdomain(string calldata subdomain, uint256 tokenId) external not_stopped payable {
         // make sure msg.sender is the owner of the NFT tokenId
-        address subdomainOwner = deadDotComSeance.ownerOf(tokenId);
+        address subdomainOwner = dotComSeance.ownerOf(tokenId);
         require(subdomainOwner == msg.sender, "cant register a subdomain for an NFT you dont own");
 
         // make sure that the tokenId is correlated to the domain

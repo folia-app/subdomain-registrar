@@ -3,13 +3,23 @@ var TestResolver = artifacts.require("TestResolver");
 // var ENS = artifacts.require("@ensdomains/ens/contracts/ENSRegistry.sol");
 var ENS = artifacts.require("ENS");
 var SubdomainRegistrar = artifacts.require("SubdomainRegistrar");
-var DeadDotComSeance = artifacts.require("DeadDotComSeance");
+var DotComSeance = artifacts.require("DotComSeance");
 var BaseRegistrarImplementation = artifacts.require("BaseRegistrarImplementation");
 
 var namehash = require('eth-ens-namehash');
 var sha3 = require('js-sha3').keccak_256;
 var Promise = require('bluebird');
 
+// var apollo = require('@apollo/client')
+// var ApolloClient = apollo.ApolloClient
+// var InMemoryCache = apollo.InMemoryCache
+// var gql = apollo.gpl
+
+// import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
+// import { createClient } from 'urql'
+const fetch = require('isomorphic-unfetch')
+var ur = require('urql')
+var createClient = ur.createClient
 var domainnames = require('../app/js/domains.json');
 
 module.exports = function (deployer, network, accounts) {
@@ -33,8 +43,8 @@ module.exports = function (deployer, network, accounts) {
 
             await ens.setSubnodeOwner('0x0', '0x' + sha3('eth'), dhr.address);
 
-            const deadDotComSeance = '';
-            await deployer.deploy(SubdomainRegistrar, ens.address, deadDotComSeance, resolver);
+            const dotComSeance = '';
+            await deployer.deploy(SubdomainRegistrar, ens.address, dotComSeance, resolver);
 
             const registrar = await SubdomainRegistrar.deployed();
 
@@ -51,14 +61,14 @@ module.exports = function (deployer, network, accounts) {
             const baseRegistrarImplementation = await BaseRegistrarImplementation.deployed(); // artifacts same for rinkeby and mainnet
 
             console.log({ens: ens.address})
-            const deadDotComSeance = await DeadDotComSeance.deployed(); // make sure it was moved from other project
-            console.log({deadDotComSeance: deadDotComSeance.address})
+            const dotComSeance = await DotComSeance.deployed(); // make sure it was moved from other project
+            console.log({dotComSeance: dotComSeance.address})
 
             const rinkebyResolver = '0xf6305c19e814d2a75429Fd637d01F7ee0E77d615';
             const mainnetResolver = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
             const resolver = network == 'rinkeby' ? rinkebyResolver : mainnetResolver
-
-            await deployer.deploy(SubdomainRegistrar, ens.address, deadDotComSeance.address, resolver);
+            console.log({resolver, rinkebyResolver, mainnetResolver})
+            await deployer.deploy(SubdomainRegistrar, ens.address, dotComSeance.address, resolver);
 
             const subdomainRegistrar = await SubdomainRegistrar.deployed()
 
@@ -78,7 +88,7 @@ module.exports = function (deployer, network, accounts) {
                 'funbug.eth',
                 'heavenlydoor.eth',
                 'iharvest.eth',
-                'misterswap.eth',
+                'mrswap.eth',
                 'netmorf.eth',
                 'popularpower.eth',
                 'stickynetworks.eth',
@@ -86,17 +96,42 @@ module.exports = function (deployer, network, accounts) {
                 'wingspanbank.eth'
             ]
 
+            const APIURL = 'https://api.thegraph.com/subgraphs/name/ensdomains/ens'
+
             for (var i = 0; i < names.length; i++) {
                 var name = names[i]
-                var id = web3.eth.ens.getMultihash(name)
+                const query = `
+                    {
+                        domains(where: {name:"${name}"}) {
+                        id
+                        name
+                        labelName
+                        labelhash
+                        }
+                    }
+                    `
+                // console.log({query})
+
+                const client = createClient({
+                    url: APIURL,
+                })
+                
+                const data = await client.query(query).toPromise()
+                // console.log({data: data.data.domains[0].labelhash})
+                const labelhash = data.data.domains[0].labelhash
+                storedName = await subdomainRegistrar.domains(labelhash)
+
+                if (name.substring(0, name.length - 4) !== storedName) {
+                    new Error(`${name} and ${storedName} don't match`)
+                } else {
+                    console.log(`nice, ${name} is same as ${storedName} (${data})`)
+                }
+
+                await baseRegistrarImplementation.reclaim(labelhash, subdomainRegistrar.address)
             }
 
-
-
-            // petsdotcom.eth
-            await baseRegistrarImplementation.reclaim("108350481691301844584283756747981115641741054191609884149132907110757544526360", subdomainRegistrar.address)
             // alladvantage.eth
-            await baseRegistrarImplementation.reclaim("73221999359359550706391122416363156849372066579048440949532785510888433287718", subdomainRegistrar.address)
+            // await baseRegistrarImplementation.reclaim("73221999359359550706391122416363156849372066579048440949532785510888433287718", subdomainRegistrar.address)
             
         }
     });
