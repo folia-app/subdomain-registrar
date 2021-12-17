@@ -68,7 +68,7 @@ module.exports = function (deployer, network, accounts) {
             const mainnetResolver = '0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41';
             const resolver = network == 'rinkeby' ? rinkebyResolver : mainnetResolver
             console.log({resolver, rinkebyResolver, mainnetResolver})
-            await deployer.deploy(SubdomainRegistrar, ens.address, dotComSeance.address, resolver);
+            // await deployer.deploy(SubdomainRegistrar, ens.address, dotComSeance.address, resolver);
 
             const subdomainRegistrar = await SubdomainRegistrar.deployed()
 
@@ -97,6 +97,8 @@ module.exports = function (deployer, network, accounts) {
             ]
 
             const APIURL = 'https://api.thegraph.com/subgraphs/name/ensdomains/ens'
+
+            var nonce = 336
 
             for (var i = 0; i < names.length; i++) {
                 var name = names[i]
@@ -127,7 +129,9 @@ module.exports = function (deployer, network, accounts) {
                     console.log(`nice, ${name} is same as ${storedName} (${data})`)
                 }
 
-                await baseRegistrarImplementation.reclaim(labelhash, subdomainRegistrar.address)
+                await baseRegistrarImplementation.reclaim(labelhash, subdomainRegistrar.address, {
+                    nonce: nonce + i
+                })
             }
 
             // alladvantage.eth

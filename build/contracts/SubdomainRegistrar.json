@@ -26313,6 +26313,176 @@
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
   "networks": {
+    "1": {
+      "events": {
+        "0x1427993bb6b6c16d8953c450c37078c8f41196e2e2db1619cda06620143e2d91": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "label",
+              "type": "bytes32"
+            }
+          ],
+          "name": "DomainConfigured",
+          "type": "event"
+        },
+        "0x8c0dd32279c25300d82425bebe31a5c703918d83d2bb57a1155dfa6cbba61cf8": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "label",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            }
+          ],
+          "name": "DomainTransferred",
+          "type": "event"
+        },
+        "0x77f7b610de5055c8f704e6a3b12874468f5785f3a7d1007b67a8a4b4c7ed88fc": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "label",
+              "type": "bytes32"
+            }
+          ],
+          "name": "DomainUnlisted",
+          "type": "event"
+        },
+        "0x4139ce95b7c4117d57ba8f9bdc08261e7c56232e6a7aeeed31e567fa7fac1946": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "label",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "subdomain",
+              "type": "string"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            }
+          ],
+          "name": "NewRegistration",
+          "type": "event"
+        },
+        "0x2ad31789a7aef8dd20e79cc0f05deb4655c33332e8e6bcb4cd1622e1a2b679f3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "domain",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "subdomain",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "tokenId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "tokenOwner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "oldSubdomain",
+              "type": "string"
+            }
+          ],
+          "name": "NewSubdomain",
+          "type": "event"
+        },
+        "0x06e9c07310f63759634ddbb7257dbb19ca404f90bd6bdef1d3386fab033cebce": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "label",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "oldOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnerChanged",
+          "type": "event"
+        },
+        "0xe96d13bc77499a3006988462ec052990ecc0f649ba1b3749314915317bb5ddcb": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "label",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "subdomain",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "expirationDate",
+              "type": "uint256"
+            }
+          ],
+          "name": "RentPaid",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xecd494c1c127ee50f4fc569c5643a81f0030e0e8",
+      "transactionHash": ""
+    },
     "4": {
       "events": {},
       "links": {},
@@ -26473,7 +26643,8 @@
     }
   },
   "schemaVersion": "3.3.3",
-  "updatedAt": "2021-12-16T00:13:43.307Z",
+  "updatedAt": "2021-12-17T11:10:35.971Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {
       "configureDomain(string)": {
